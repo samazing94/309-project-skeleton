@@ -15,14 +15,15 @@
     <button id ="test"> Show all the articles </button>
     <div id = "list"></div>
   </body>
-  <!-- <script src="lib/jquery/dist/jquery.min.js"></script> -->
-  <script
+  <script src="lib/jquery/dist/jquery.min.js"></script>
+  <!-- <script>
 			  src="http://code.jquery.com/jquery-3.1.1.min.js"
 			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-			  crossorigin="anonymous"></script>
+			  crossorigin="anonymous"></script> -->
   <script src="vendor/ejs_production.js"></script>
   <script>
     $("#test").click(function(){
+      console.log('test');
       $.get("/api/articles", function(data, status){
           var html = new  EJS({url: 'views/article/list.ejs'}).render({articles:data});
           $("#list").html(html);
