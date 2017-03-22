@@ -22,6 +22,7 @@ var ProductSchema = {
     default: '',
     required: 'Price required'
   },
+
   quantity: {
     type: Number,
     default: '',
