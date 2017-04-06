@@ -25,13 +25,6 @@ exports.new = function(req, res) {
 	});
 };
 
-exports.all = function(req, res) {
-	res.render('./../public/views/product/list.ejs', {
-		user: req.user || null,
-		request: req
-	});
-};
-
 exports.edit = function(req, res) {
 	res.render('./../public/views/product/edit.ejs', {
 		user: req.user || null,
@@ -46,8 +39,29 @@ exports.view = function(req, res) {
 	});
 };
 
+exports.all = function(req, res) {
+  Product.find(function(err, data) {
+    if (err) {
+      return res.status(400).send({
+
+          message: errorHandler.getErrorMessage(err)
+        });
+    } else {
+      console.log("api called");
+      console.log(data);
+
+      res.render('./../public/views/product/list.ejs', {
+    		user: req.user || null,
+    		request: req,
+        products: data
+    	});
+    }
+  });
+
+};
 
 module.exports.create = function(req, res) {
+  console.log(req.user);
   var product = new Product(req.body);
   product.user = req.user;
   product.save(function(err, data) {
@@ -65,7 +79,6 @@ module.exports.create = function(req, res) {
 module.exports.read = function(req, res) {
   res.json(req.product);
 };
-
 
 exports.delete = function(req, res) {
 	var product = req.product;
@@ -101,4 +114,3 @@ exports.productByID = function(req, res, next, id) {
 		next();
 	});
 };
-

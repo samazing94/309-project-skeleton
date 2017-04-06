@@ -38,7 +38,7 @@ var ProductSchema = {
     type: Date,
     default: Date.now
   }
-}
+};
 
 var Product = mongoose.model('Product', ProductSchema, 'products');
 module.exports = Product;
